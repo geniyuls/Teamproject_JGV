@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>영화관</title>
+    <link rel="stylesheet" th:href="@{'./assets/styles/index.css'}" type="text/css">
+    <link rel="stylesheet" th:href="@{'../../assets/styles/common.css'}" type="text/css">
+    <link rel="stylesheet" th:href="@{'../../fragments/assets/styles/index.css'}" type="text/css">
+    <link rel="stylesheet" th:href="@{'../../fragments/assets/styles/common.css'}" type="text/css">
+    <script defer th:src="@{'./assets/scripts/index.js'}"></script>
+    <script defer th:src="@{'../../assets/scripts/common.js'}"></script>
+</head>
+<body>
+<th:block th:replace="~{fragments/common.html :: advertisement}"></th:block>
+<th:block th:replace="~{fragments/common.html :: header}"></th:block>
+<th:block th:replace="~{fragments/common.html :: nav}"></th:block>
+<main id="main">
+    <div class="img">
+        <div class="head">
+            <img src="https://img.cgv.co.kr/R2014/images/title/h4_favorite_cgv.png" alt="" class="image">
+            <ul id="favorite-theaters">
+                <li class="container">
+                    <a href="#" class="text-container">
+                        <span class="text">1</span>
+                    </a>
+                </li>
+                <li class="container">
+                    <a href="#" class="text-container">
+                        <span class="text">2</span>
+                    </a>
+                </li>
+                <li class="container">
+                    <a href="#" class="text-container">
+                        <span class="text">3</span>
+                    </a>
+                </li>
+                <li class="container">
+                    <a href="#" class="text-container">
+                        <span class="text">4</span>
+                    </a>
+                </li>
+                <li class="container">
+                    <a href="#" class="text-container">
+                        <span class="text">5</span>
+                    </a>
+                </li>
+            </ul>
+            <button class="button" type="button">
+                <img src="https://img.cgv.co.kr/r2014/images/common/btn/btn_plus.gif" alt="" class="image">
+            </button>
+        </div>
+        <ul class="main">
+            <li class="item"
+                th:each="region : ${regions}"
+                th:text="${region.getRegName()}"
+                th:rel="${region.getRegName()}">
+            </li>
+        </ul>
+        <div class="theater-container">
+            <ul class="item-container">
+                <li class="item"
+                    th:each="theater : ${theaters}"
+                    th:text="${theater.getThName()}"
+                    th:if="${theater.getThName().equals('CGV대구')}"
+                    th:classappend="select"></li>
+                <li class="item"
+                    th:if="${!theater.getThName().equals('CGV대구')}"
+                    th:each="theater : ${theaters}"
+                    th:text="${theater.getThName()}"></li>
+            </ul>
+        </div>
+    </div>
+    <div class="line-wrapper">
+        <div class="line">
+            <img src="https://img.cgv.co.kr/R2014/images/title/h3_theater.gif" alt="영화관" class="theater">
+        </div>
+    </div>
+    <div class="theater-container" th:if="${theaterVos == null}">
+        <div class="header">
+            <span class="text">CGV대구</span>
+            <span class="stretch"></span>
+            <span class="button">단체/대관 문의</span>
+        </div>
+        <div class="img">
+            <img src="https://img.cgv.co.kr/Theater/Theater/2022/1223/16717573376930.png" alt="" class="image">
+            <div class="theater-info-container">
+                <div class="small-container">
+                    <div class="header">
+                        <div class="info-container">
+                            <div class="theater-info">대구광역시 북구 칠성동2가 20-1 스펙트럼시티 4층<br>대구광역시 북구 침산로 93 스펙트럼시티 4층</div>
+                        </div>
+                        <a href="#menu" class="theater-info guide" target="_self">위치 / 주차 안내 ></a>
+                        <div class="stretch"></div>
+                        <div class="cinema-type">
+                            <a href="#" class="IMAX" target="_blank"></a>
+                            <a href="#" class="DX" target="_blank"></a>
+                        </div>
+                    </div>
+                    <div class="theater-info">8관/320석</div>
+                </div>
+                <div class="stretch"></div>
+                <div class="notice-container">
+                    <div class="theater-info">공지사항</div>
+                    <a href="#" class="button"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="theater-container"
+         th:if="${theaterVos != null}"
+         th:each="vos : ${theaterVos}">
+        <div class="header">
+            <span th:text="${vos[0][0]}" class="text"></span>
+            <span class="stretch"></span>
+            <span class="button">단체/대관 문의</span>
+        </div>
+        <div class="img">
+            <img th:src="${vos[0][3]}" alt="" class="image">
+            <div class="theater-info-container">
+                <div class="small-container">
+                    <div class="header">
+                        <div class="info-container">
+                            <div th:utext="${vos[0][1]} + '<br>' + ${vos[0][2]}" class="theater-info"></div>
+                        </div>
+                        <a href="#menu" class="theater-info guide" target="_self">위치 / 주차 안내 ></a>
+                        <div class="stretch"></div>
+                        <div class="cinema-type">
+                            <a href="#"
+                               th:if="${!vo.equals('2D')}"
+                               th:each="vo : ${vos[1]}"
+                               th:class="${vo}"
+                               target="_blank"></a>
+                        </div>
+                    </div>
+                    <div class="theater-info" th:text="${vos[0][5]} + '관/' + ${vos[0][4]} + '석'"></div>
+                </div>
+                <div class="stretch"></div>
+                <div class="notice-container">
+                    <div class="theater-info">공지사항</div>
+                    <a href="#" class="button"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="advertisement-info">
+        <a href="#" target="_self" class="advertisement-move">
+            <img src="https://adimg.cgv.co.kr/images/202411/Firefighters/1121_980x90.jpg" alt="배너"
+                 class="advertisement">
+        </a>
+    </div>
+    <div class="button-container">
+        <div class="button" data-id="cinema">
+            <img class="select" src="https://img.cgv.co.kr/R2014/images/common/ico/ico_finger.png" alt=""
+                 data-id="cinema">
+            <span class="text">상영시간표</span>
+        </div>
+        <div class="button" data-id="information">
+            <img class="select hidden" src="https://img.cgv.co.kr/R2014/images/common/ico/ico_finger.png" alt=""
+                 data-id="information">
+            <span class="text">위치/주차안내</span>
+        </div>
+    </div>
+    <div class="information" data-id="cinema">
+        <div class="cinema-info">
+            <div class="cinema-header">
+                <div class="day-containers"
+                     th:if="${theaterVos != null}"
+                     th:each="vos : ${theaterVos}">
+                    <button class="before button"></button>
+                    <ul class="day-container">
+                        <th:block th:each="vo : ${vos[2]}">
+                            <li class="item" th:each="date, iterStat : ${vo.value.split(',')}">
+                                <div class="small-container">
+                                    <div th:text="${vo.key.split('-')[1]} + '월'" class="day"></div>
+                                    <div th:text="${date.split('-')[1]}" class="day"></div>
+                                </div>
+                                <div th:text="${date.split('-')[0]}" class="day"></div>
+                            </li>
+                        </th:block>
+                    </ul>
+                    <button class="after button"></button>
+                </div>
+                <div class="day-containers"
+                     th:if="${theaterVos == null}">
+                    <button class="before button"></button>
+                    <ul class="day-container">
+                        <li class="item select">
+                            <div class="small-container">
+                                <div class="day">12월</div>
+                                <div class="day">목</div>
+                            </div>
+                            <div class="day">05</div>
+                        </li>
+                        <li class="item">
+                            <div class="small-container">
+                                <div class="day">12월</div>
+                                <div class="day">목</div>
+                            </div>
+                            <div class="day">05</div>
+                        </li>
+                        <li class="item">
+                            <div class="small-container">
+                                <div class="day">12월</div>
+                                <div class="day">목</div>
+                            </div>
+                            <div class="day">05</div>
+                        </li>
+                        <li class="item">
+                            <div class="small-container">
+                                <div class="day">12월</div>
+                                <div class="day">목</div>
+                            </div>
+                            <div class="day">05</div>
+                        </li>
+                        <li class="item">
+                            <div class="small-container">
+                                <div class="day">12월</div>
+                                <div class="day">목</div>
+                            </div>
+                            <div class="day">05</div>
+                        </li>
+                        <li class="item">
+                            <div class="small-container">
+                                <div class="day">12월</div>
+                                <div class="day">목</div>
+                            </div>
+                            <div class="day">05</div>
+                        </li>
+                        <li class="item">
+                            <div class="small-container">
+                                <div class="day">12월</div>
+                                <div class="day">목</div>
+                            </div>
+                            <div class="day">05</div>
+                        </li>
+                        <li class="item">
+                            <div class="small-container">
+                                <div class="day">12월</div>
+                                <div class="day">목</div>
+                            </div>
+                            <div class="day">05</div>
+                        </li>
+                    </ul>
+                    <button class="after button"></button>
+                </div>
+                <div class="cinema-info-detail">
+                    <div class="cinema-detail">관람가격 안내</div>
+                    <div class="cinema-detail">관람등급 안내</div>
+                </div>
+            </div>
+            <div class="notice">* 시간을 클릭하시면 빠른 예매를 할 수 있습니다.</div>
+            <ul class="items" th:if="${screenVos == null}">
+                <li class="item">
+                    <div class="movie-container">
+                        <div class="rating all"></div>
+                        <a href="#" class="text">플레이브 팬 콘서트 ‘헬로, 아스테룸!’ 앙코르 인 시네마</a>
+                        <div class="date-notice">
+                            <span class="able">상영중</span>
+                            <span class="reservation">예매중</span>
+                            <span class="dDay">D-4</span>
+                        </div>
+                        <span class="long-text">/194분/2024.12.04 개봉</span>
+                    </div>
+                    <div class="screen-container">
+                        <div class="theater-info">
+                            <img class="arrow" src="https://img.cgv.co.kr/r2014/images/common/ico/ico_arrow03.png"
+                                 alt="화살표">
+                            <span class="text">2D</span>
+                            <img src="https://img.cgv.co.kr/r2014/images/common/bg/bg_li_vline.gif" alt="작대기">
+                            <span class="IMAX text"></span>
+                            <img src="https://img.cgv.co.kr/r2014/images/common/bg/bg_li_vline.gif" alt="작대기">
+                            <span class="text">총 166석</span>
+                        </div>
+                        <div class="time-table-container">
+                            <a href="#" class="time-table">
+                                <div class="time">18:20</div>
+                                <div class="seat">137석</div>
+                            </a>
+                            <a href="#" class="time-table">
+                                <div class="time">18:20</div>
+                                <div class="seat">137석</div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li class="item">
+                    <div class="movie-container">
+                        <div class="rating all"></div>
+                        <a href="#" class="text">플레이브 팬 콘서트 ‘헬로, 아스테룸!’ 앙코르 인 시네마</a>
+                        <div class="date-notice">
+                            <span class="able">상영중</span>
+                            <span class="reservation">예매중</span>
+                            <span class="dDay">D-4</span>
+                        </div>
+                        <span class="long-text">/194분/2024.12.04 개봉</span>
+                    </div>
+                    <div class="screen-container">
+                        <div class="theater-info">
+                            <img class="arrow" src="https://img.cgv.co.kr/r2014/images/common/ico/ico_arrow03.png"
+                                 alt="화살표">
+                            <span class="text">2D</span>
+                            <img src="https://img.cgv.co.kr/r2014/images/common/bg/bg_li_vline.gif" alt="작대기">
+                            <span class="IMAX text"></span>
+                            <img src="https://img.cgv.co.kr/r2014/images/common/bg/bg_li_vline.gif" alt="작대기">
+                            <span class="text">총 166석</span>
+                        </div>
+                        <div class="time-table-container">
+                            <a href="#" class="time-table">
+                                <div class="time">18:20</div>
+                                <div class="seat">137석</div>
+                            </a>
+                            <a href="#" class="time-table">
+                                <div class="time">18:20</div>
+                                <div class="seat">137석</div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li class="item">
+                    <div class="movie-container">
+                        <div class="rating all"></div>
+                        <a href="#" class="text">플레이브 팬 콘서트 ‘헬로, 아스테룸!’ 앙코르 인 시네마</a>
+                        <div class="date-notice">
+                            <span class="able">상영중</span>
+                            <span class="reservation">예매중</span>
+                            <span class="dDay">D-4</span>
+                        </div>
+                        <span class="long-text">/194분/2024.12.04 개봉</span>
+                    </div>
+                    <div class="screen-container">
+                        <div class="theater-info">
+                            <img class="arrow" src="https://img.cgv.co.kr/r2014/images/common/ico/ico_arrow03.png"
+                                 alt="화살표">
+                            <span class="text">2D</span>
+                            <img src="https://img.cgv.co.kr/r2014/images/common/bg/bg_li_vline.gif" alt="작대기">
+                            <span class="IMAX text"></span>
+                            <img src="https://img.cgv.co.kr/r2014/images/common/bg/bg_li_vline.gif" alt="작대기">
+                            <span class="text">총 166석</span>
+                        </div>
+                        <div class="time-table-container">
+                            <a href="#" class="time-table">
+                                <div class="time">18:20</div>
+                                <div class="seat">137석</div>
+                            </a>
+                            <a href="#" class="time-table">
+                                <div class="time">18:20</div>
+                                <div class="seat">137석</div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <ul class="items" th:if="${screenVos != null}">
+                <li class="item" th:each="screen : ${screenVos}">
+                    <div class="movie-container">
+                        <div th:classappend="${screen.key[0]}" class="rating"></div>
+                        <a th:text="${screen.key[1]}" href="#" class="text"></a>
+                        <div class="date-notice">
+                            <span th:if="${screen.key[3] <= #dates.format(#dates.createNow(), 'yyyy.MM.dd')}" class="able">상영중</span>
+                            <span th:if="${screen.key[3] > #dates.format(#dates.createNow(), 'yyyy.MM.dd')}" class="reservation">예매중</span>
+                            <span th:if="${screen.key[3] > #dates.format(#dates.createNow(), 'yyyy.MM.dd')}" th:text="${screen.key[7].replace('P', 'D').substring(0, screen.key[7].length() - 1)}" class="dDay"></span>
+                        </div>
+                        <span th:text="${screen.key[6].replace('[', '').replace(']', '') + '/' + screen.key[2] + '분/' + screen.key[3] + ' 개봉'}" class="long-text"></span>
+                    </div>
+                    <div class="screen-container"
+                         th:each="scVal : ${screen.value}">
+                        <div class="theater-info">
+                            <img class="arrow" src="https://img.cgv.co.kr/r2014/images/common/ico/ico_arrow03.png"
+                                 alt="화살표">
+                            <span th:if="${!scVal.key[1].equals('DX')}" th:text="${scVal.key[1]}" class="text"></span>
+                            <span th:if="${scVal.key[1].equals('DX')}" th:text="4 + ${scVal.key[1]}" class="text"></span>
+                            <img src="https://img.cgv.co.kr/r2014/images/common/bg/bg_li_vline.gif" alt="작대기">
+                            <span th:if="${scVal.key[0].replace('&', '').trim().equals(scVal.key[1])}"
+                                  th:classappend="${scVal.key[0].replace('&', '').trim()}" class="text"></span>
+                            <span th:if="${!scVal.key[0].replace('&', '').trim().equals(scVal.key[1])}"
+                                  th:text="${scVal.key[0]}" class="text"></span>
+                            <img src="https://img.cgv.co.kr/r2014/images/common/bg/bg_li_vline.gif" alt="작대기">
+                            <span th:text="'총 ' + ${screen.key[4]} + '석'" class="text"></span>
+                        </div>
+                        <div class="time-table-container">
+                            <a href="#" class="time-table" th:each="sc : ${scVal.value}">
+                                <div th:text="${sc.split(',')[0].replace('[', '')}" class="time"></div>
+                                <div th:text="${sc.split(',')[1].replace(']', '')} + '석'" class="seat"></div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="notice-footer">[공지] 입장 지연에 따른 관람 불편을 최소화하기 위해 영화는 10분 후 상영이 시작됩니다.</div>
+        </div>
+        <div class="advertisement-container">
+            <a href="#" target="_self" class="advertisement-move">
+                <img src="https://adimg.cgv.co.kr/images/202411/MyHero/1119_160x300.jpg" alt="배너"
+                     class="advertisement">
+            </a>
+            <a href="#" target="_self" class="advertisement-move">
+                <img src="https://adimg.cgv.co.kr/images/202411/MyHero/1119_160x300.jpg" alt="배너"
+                     class="advertisement">
+            </a>
+        </div>
+    </div>
+    <div class="information hidden" data-id="information">
+        <div class="car-info" id="menu">
+            <div class="header">
+                <span class="bus"></span>
+                <span class="text">교통안내</span>
+                <span class="stretch"></span>
+                <a href="#" class="find">실시간 빠른 길 찾기</a>
+            </div>
+            <div class="bus detail"
+                 th:if="${theaterVos != null}"
+                 th:each="map : ${theaterVos}"
+                 th:utext="${map[0][6].split('&&')[0]}">
+            </div>
+            <div class="bus detail"
+                 th:if="${theaterVos == null}">
+                <p>1) 지하철&nbsp;: 3호선-북구청역 1번 출구에서 약 750M</p>
+                <p>2) 버스</p>
+                <p>-이마트칠성점앞 : 300, 349, 836, 동구2, 칠곡2</p>
+                <p>-오페라삼정그린코아APT : 300, 349, 836, 동구2, 북구4, 칠곡2</p>
+                <p>-대구은행제2본점앞 : 300, 323-1, 523, 708, 730, 동구2, 북구4,칠곡2</p>
+            </div>
+            <div class="header">
+                <span class="car"></span>
+                <span class="text">주차안내</span>
+                <span class="stretch"></span>
+            </div>
+            <div class="car detail"
+                 th:if="${theaterVos != null}"
+                 th:each="map : ${theaterVos}"
+                 th:utext="${map[0][6].split('&&')[1]}">
+            </div>
+            <div class="car detail"
+                 th:if="${theaterVos == null}">
+                <p>
+                    '■ 주차 안내<br>
+                    &nbsp;- 스펙트럼시티 지하 4층, 5층 이용 시, 무료주차 가능<br>
+                    &nbsp; (지상주차장 및 지하2층,3층은 이마트 전용주차장으로 주차요금 발생함)<br>
+                    &nbsp;- 지하주차장 이용 시, 2.2M 이상의 차량은 입차제한 있음<br>
+                    <br>
+                    ■ 주차 확인(인증 방법)<br>
+                    - 주차정산 키오스크에서 관람티켓 바코드 인증하여 주차할인 등록(키오스크 위치: 4층 CGV로비, 지하 4층/지하5층 엘리베이터 앞)<br>
+                    <br>
+                    ■ 주차 요금<br>
+                    - 영화 관람 시 입차 시간 기준 3시간 30분 무료(이후 최초 30분 1,000원, 추가 10분당 500원)<br>
+                    - 영화 관람편 수 무관 무료 주차시간 적용 동일<br>
+                    - 사전정산 미진행 후 출차 시에는 환불 불가<br>
+                    &nbsp;
+                </p>
+            </div>
+        </div>
+        <div class="advertisement-container">
+            <a href="#" target="_self" class="advertisement-move">
+                <img src="https://adimg.cgv.co.kr/images/202411/MyHero/1119_160x300.jpg" alt="배너"
+                     class="advertisement">
+            </a>
+            <a href="#" target="_self" class="advertisement-move">
+                <img src="https://adimg.cgv.co.kr/images/202411/MyHero/1119_160x300.jpg" alt="배너"
+                     class="advertisement">
+            </a>
+        </div>
+    </div>
+</main>
+<th:block th:replace="~{fragments/common.html :: footer}"></th:block>
+</body>
+</html>

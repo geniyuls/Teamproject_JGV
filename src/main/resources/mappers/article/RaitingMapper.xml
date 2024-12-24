@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jykim.project_jgv.mappers.movie.RaitingMapper">
+
+    <insert id="insertMovieRaiting" useGeneratedKeys="true" keyProperty="raNum" parameterType="com.jykim.project_jgv.entities.movie.RatingEntity">
+        INSERT INTO jgv.rating (ra_grade)
+        VALUES (#{raGrade})
+    </insert>
+
+    <select id="selectRaitingIdByName" resultType="Integer">
+        SELECT `ra_num`
+        FROM jgv.rating
+        WHERE ra_grade = #{RaitingName}
+    </select>
+</mapper>

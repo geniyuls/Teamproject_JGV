@@ -1,0 +1,256 @@
+main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+main > .-spring {
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+main > .contents {
+  width: 100%;
+  height: 31.125rem;
+  background-color: black;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+main > .contents > .video_wrapper {
+  width: 980px;
+  height: 100%;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  justify-content: center;
+  position: relative;
+  z-index: 3;
+}
+main > .contents > .video_wrapper > strong {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  transform: translateY(-100%);
+  position: absolute;
+  z-index: 3;
+}
+main > .contents > .video_wrapper > span {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff;
+  transform: translateY(60%);
+  position: relative;
+  z-index: 3;
+}
+main > .contents > .video_wrapper > .link-container {
+  background-color: #9e9e9e;
+  border-radius: 1.3rem;
+  color: #343434;
+  cursor: pointer;
+  text-align: center;
+  padding: 0.5rem 1.2rem;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  transform: translateY(170%);
+  z-index: 4;
+}
+main > .contents > .video_wrapper > .link-container > a {
+  color: #000000;
+  font-size: 0.875rem;
+  text-decoration: none;
+}
+main > .contents > .video_wrapper > video {
+  width: 100%;
+  height: 100%;
+  transform: scale(1.35);
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  object-fit: cover;
+  z-index: 0;
+}
+main > .contents > .video_wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to right, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, rgb(0, 0, 0) 100%);
+  z-index: 2;
+}
+
+#movie-container {
+  width: 980px;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  justify-content: center;
+  margin-top: 3rem;
+  padding: 1rem 2rem;
+}
+#movie-container > .title-container {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+  justify-content: flex-start;
+  text-align: center;
+  font-size: 1.25rem;
+  letter-spacing: 0.05rem;
+  font-weight: 700;
+}
+#movie-container > .title-container > .-spring {
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+#movie-container > .title-container > h2 > a {
+  color: #000000;
+}
+#movie-container > .movie-chart {
+  width: 980px;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  justify-content: flex-start;
+}
+#movie-container > .movie-chart > .movie-wrapper {
+  width: 11rem;
+  height: 16rem;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: center;
+}
+#movie-container > .movie-chart > .movie-wrapper > a > img {
+  border: 1px solid transparent;
+  border-radius: 0.7rem;
+  width: 10.5rem;
+  height: 14.625rem;
+}
+#movie-container > .movie-chart > .movie-wrapper > .movie-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+#theater {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  justify-content: center;
+  width: 100%;
+  background-color: #f6f6f6;
+  padding: 2rem 0;
+}
+#theater > .-spring {
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+#theater > .background {
+  width: 980px;
+}
+#theater > .background > .title-container {
+  width: 100%;
+  font-size: 1.5rem;
+  padding-bottom: 1rem;
+}
+#theater > .background > .theater-list {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 2.3rem;
+  justify-content: flex-start;
+  width: 100%;
+}
+#theater > .background > .theater-list > .-spring {
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+#theater > .background > .theater-list > .image-wrapper {
+  width: 100%;
+  height: auto;
+}
+#theater > .background > .theater-list > .image-wrapper > a > img {
+  width: 500px;
+  height: 260px;
+}
+#theater > .background > .theater-list > .item-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  justify-content: center;
+  width: 100%;
+  height: 260px;
+}
+#theater > .background > .theater-list > .item-container > .-spring {
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+#theater > .background > .theater-list > .item-container > .item {
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+  justify-content: center;
+}
+#theater > .background > .theater-list > .item-container > .item > .-spring {
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+#theater > .background > .theater-list > .item-container > .item > .text {
+  width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: center;
+  border-bottom: 1px solid #f2f2f2;
+  color: #222222;
+  padding: 1rem 2rem;
+  white-space: nowrap;
+}
+#theater > .background > .theater-list > .item-container > .item > .text > .-spring {
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+#theater > .background > .theater-list > .item-container > .item > .text:hover {
+  border: 1.5px solid #222222;
+  border-radius: 0.5rem;
+  font-weight: 700;
+}
+#theater > .background > .theater-list > .item-container > .item > .text > .title {
+  font-size: 1.22rem;
+  font-weight: 500;
+}
+#theater > .background > .theater-list > .item-container > .item > .text > .sub-text {
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid #f6f6f6;
+  border-radius: 0.3rem;
+  background-color: #f6f6f6;
+  color: #666666;
+  padding: 0.2rem 0.4rem;
+}
+
+/*# sourceMappingURL=index.css.map */

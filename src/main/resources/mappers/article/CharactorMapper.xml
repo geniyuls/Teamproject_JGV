@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jykim.project_jgv.mappers.movie.CharactorMapper">
+    <insert id="insertCharacter" useGeneratedKeys="true" keyProperty="chNum" parameterType="com.jykim.project_jgv.entities.movie.CharactorEntity">
+        INSERT INTO jgv.charactor (ch_name, ch_job, ch_birth, ch_nation)
+        VALUES (#{chName}, #{chJob}, #{chBirth}, #{chNation})
+    </insert>
+
+    <select id="selectCharacterIdByUniqueFields" resultType="Integer">
+        SELECT ch_num
+        FROM jgv.charactor
+        WHERE ch_name = #{CharacterName}
+        AND (ch_job = #{job} OR #{job} IS NULL)
+        AND (ch_birth = #{birth} OR #{birth} IS NULL)
+        LIMIT 1
+    </select>
+
+    <insert id="insertCharacterImg">
+        INSERT INTO jgv.charactor_image (c_img_url, ch_num)
+        VALUES (#{imgUrl}, #{ChNum})
+    </insert>
+
+    <insert id="insertMovieCharacter">
+        INSERT INTO jgv.movie_charactor (ch_num, mo_num)
+        VALUES (#{chnum}, #{monum})
+    </insert>
+
+    <select id="selectActorNamesByMovieId" resultType="string">
+        SELECT DISTINCT ch_name
+        FROM jgv.charactor c
+        INNER JOIN jgv.movie_charactor mc on c.ch_num = mc.ch_num
+        WHERE mc.mo_num = #{monum}
+        AND NOT c.ch_job = '감독'
+        ORDER BY c.ch_num ASC
+    </select>
+    <select id="selectActorImagesByMovieId" resultType="string">
+        SELECT MIN(c_img_url) AS c_img_url
+        FROM jgv.charactor_image
+                 INNER JOIN jgv.charactor c ON charactor_image.ch_num = c.ch_num
+                 INNER JOIN (
+            SELECT DISTINCT ch_num
+            FROM jgv.movie_charactor
+            WHERE mo_num = #{monum}
+        ) mc ON c.ch_num = mc.ch_num
+        WHERE c.ch_job != '감독'
+        GROUP BY c.ch_num;
+    </select>
+
+    <select id="selectCharacterImgIdByCharIdAndUrl" resultType="Integer">
+        SELECT c_img_num
+        FROM jgv.charactor_image
+        WHERE ch_num = #{ChNum}
+        AND c_img_url = #{characterImage}
+    </select>
+
+    <select id="isMovieCharacterMappingExists" resultType="Boolean">
+        SELECT EXISTS(
+            SELECT 1
+            FROM jgv.movie_charactor
+            WHERE mo_num = #{monum} AND ch_num = #{chnum}
+        )
+
+    </select>
+</mapper>

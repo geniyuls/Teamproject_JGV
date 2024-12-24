@@ -1,0 +1,1656 @@
+@charset "UTF-8";
+#main {
+  width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#main > .header {
+  width: 980px;
+  max-width: 980px;
+  min-width: 980px;
+  height: 10rem;
+}
+#main > .main-container {
+  width: 100%;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+  justify-content: center;
+}
+#main > .main-container > .mains.hidden {
+  display: none;
+}
+#main > .main-container > .main {
+  height: 565px;
+  width: 980px;
+  max-width: 980px;
+  min-width: 980px;
+  user-select: none;
+  display: flex;
+  flex-direction: row;
+}
+#main > .main-container > .main > .section {
+  height: 100%;
+  border-left: 0.15rem solid #d4d3c9;
+}
+#main > .main-container > .main > .section:nth-last-child(1) {
+  border-right: 0.15rem solid #d4d3c9;
+}
+#main > .main-container > .main > .section.movie {
+  width: 284px;
+}
+#main > .main-container > .main > .section.theater {
+  width: 265px;
+}
+#main > .main-container > .main > .section.day {
+  width: 91px;
+}
+#main > .main-container > .main > .section.time {
+  width: 346px;
+}
+#main > .main-container > .main > .section > .header {
+  height: 2rem;
+  background-color: #333333;
+}
+#main > .main-container > .main > .section > .header > .movie {
+  height: 100%;
+  background-image: url("https://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/titles.png");
+  background-repeat: no-repeat;
+  background-position: 50% 8px;
+}
+#main > .main-container > .main > .section > .header > .theater {
+  height: 100%;
+  background-image: url("https://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/titles.png");
+  background-repeat: no-repeat;
+  background-position: 50% -25px;
+}
+#main > .main-container > .main > .section > .header > .day {
+  height: 100%;
+  background-image: url("https://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/titles.png");
+  background-repeat: no-repeat;
+  background-position: 50% -58px;
+}
+#main > .main-container > .main > .section > .header > .time {
+  height: 100%;
+  background-image: url("https://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/titles.png");
+  background-repeat: no-repeat;
+  background-position: 50% -91px;
+}
+#main > .main-container > .main > .section .body {
+  height: calc(100% - 2rem);
+  background-color: #f2f0e5;
+}
+#main > .main-container > .main > .section .body .content {
+  box-sizing: border-box;
+  height: 100%;
+  padding: 1rem 1rem;
+}
+#main > .main-container > .main > .section .body .content > .order {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  background-image: url("https://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/step1/sortmenu_border_bottom.png");
+  background-repeat: repeat-x;
+  background-position: bottom;
+}
+#main > .main-container > .main > .section .body .content > .order .text {
+  cursor: pointer;
+  padding-bottom: 0.5rem;
+  color: #666;
+  font-size: 0.85rem;
+}
+#main > .main-container > .main > .section .body .content > .order .text.select {
+  color: #333;
+  background-image: url("https://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/step1/sortmenu_btn_on.png");
+  background-repeat: no-repeat;
+  background-position: 50% 100%;
+}
+#main > .main-container > .main > .section .body .content > .movie {
+  height: 94%;
+  overflow-y: auto;
+}
+#main > .main-container > .main > .section .body .content > .movie::-webkit-scrollbar {
+  width: 10px; /* 스크롤바 너비 */
+}
+#main > .main-container > .main > .section .body .content > .movie::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.5); /* 스크롤바의 색상 */
+  border-radius: 5px; /* 둥근 모서리 */
+  height: 10%;
+}
+#main > .main-container > .main > .section .body .content > .movie > .item-container {
+  margin-top: 0.1rem;
+  width: 100%;
+  font-weight: 600;
+  border: 0.1rem solid transparent;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+#main > .main-container > .main > .section .body .content > .movie > .item-container > .text {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 0.3rem;
+  border: 0.1rem solid transparent;
+  line-height: 1;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  justify-content: flex-start;
+}
+#main > .main-container > .main > .section .body .content > .movie > .item-container > .text > .rating {
+  width: 1.25rem;
+  height: 1.294rem;
+}
+#main > .main-container > .main > .section .body .content > .movie > .item-container > .text > .rating.nineteen {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' fill='none'%3e%3cg clip-path='url(%23age19)'%3e%3cpath fill='%23D92B35' d='M44.363 50H5.637a5.603 5.603 0 0 1-3.981-1.646A5.651 5.651 0 0 1 0 44.362V5.638a5.671 5.671 0 0 1 1.656-3.992A5.623 5.623 0 0 1 5.637 0h38.726a5.603 5.603 0 0 1 3.981 1.646A5.65 5.65 0 0 1 50 5.638v38.724a5.67 5.67 0 0 1-1.656 3.992A5.623 5.623 0 0 1 44.363 50z'/%3e%3cpath fill='%23fff' d='M10.593 42.225V17.377H7.84l3.565-9.607h6.9v34.456h-7.712zM40.921 7.77H21.759a.766.766 0 0 0-.714.476.777.777 0 0 0-.059.297v17.35a1.545 1.545 0 0 0 .95 1.424c.186.077.386.116.588.116h11.68v8.282h-5.457v-4.493h-7.49v10.235a.774.774 0 0 0 .77.768H40.92a.767.767 0 0 0 .769-.768V8.543a.774.774 0 0 0-.769-.773zm-12.31 7.107a.773.773 0 0 1 .773-.769h3.96a.767.767 0 0 1 .769.769v6.034a.774.774 0 0 1-.77.772h-3.959a.766.766 0 0 1-.714-.476.775.775 0 0 1-.059-.296v-6.034z'/%3e%3c/g%3e%3cdefs%3e%3cclipPath id='age19'%3e%3cpath fill='%23fff' d='M0 0h50v50H0z'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-attachment: scroll;
+}
+#main > .main-container > .main > .section .body .content > .movie > .item-container > .text > .rating.fifteen {
+  background-image: url("data:image/svg+xml;charset=UTF-8, %3csvg width='20' height='20' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cg clip-path='url(%23age15)'%3e%3cpath d='M17.745 20H2.255A2.256 2.256 0 0 1 0 17.745V2.255A2.255 2.255 0 0 1 2.255 0h15.49A2.253 2.253 0 0 1 20 2.255v15.49A2.254 2.254 0 0 1 17.745 20Z' fill='%23DD742F'/%3e%3cpath d='M4.318 16.891v-9.94H3.217L4.643 3.11h2.761V16.89H4.318ZM16.313 7.815h-4.834v-2.02h5.052V3.107H8.45v7.342h5.177v3.85h-2.183v-1.812H8.45v4.095a.306.306 0 0 0 .307.308h7.556a.306.306 0 0 0 .308-.308V8.125a.307.307 0 0 0-.308-.31Z' fill='%23fff'/%3e%3c/g%3e%3cdefs%3e%3cclipPath id='age15'%3e%3cpath fill='%23fff' d='M0 0h20v20H0z'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-attachment: scroll;
+}
+#main > .main-container > .main > .section .body .content > .movie > .item-container > .text > .rating.twelve {
+  background-image: url("data:image/svg+xml;charset=UTF-8, %3csvg width='20' height='20' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cg clip-path='url(%23age12)'%3e%3cpath d='M17.745 20H2.255A2.256 2.256 0 0 1 0 17.745V2.255A2.255 2.255 0 0 1 2.255 0h15.49A2.255 2.255 0 0 1 20 2.255v15.49A2.256 2.256 0 0 1 17.745 20Z' fill='%23E9B62F'/%3e%3cpath d='M4.328 16.891v-9.94H3.227L4.65 3.108h2.761V16.89H4.328ZM16.303 3.109H8.765a.308.308 0 0 0-.307.307v4.165h3.013V5.706h2.13v1.659l-5.258 7.488v2.022h8.228v-2.69h-4.396l3.842-5.394c.12-.17.216-.32.29-.443.068-.12.128-.243.18-.37.05-.127.083-.26.098-.397.02-.173.029-.348.027-.522V3.416a.307.307 0 0 0-.309-.307Z' fill='%23fff'/%3e%3c/g%3e%3cdefs%3e%3cclipPath id='age12'%3e%3cpath fill='%23fff' d='M0 0h20v20H0z'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-attachment: scroll;
+}
+#main > .main-container > .main > .section .body .content > .movie > .item-container > .text > .rating.all {
+  background-image: url("data:image/svg+xml;charset=UTF-8, %3csvg width='20' height='20' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cg clip-path='url(%23ageAll)'%3e%3cpath d='M17.745 20H2.256A2.256 2.256 0 0 1 0 17.745V2.255A2.255 2.255 0 0 1 2.256 0h15.49A2.253 2.253 0 0 1 20 2.255v15.49A2.254 2.254 0 0 1 17.745 20Z' fill='%23269C56'/%3e%3cpath d='M5.74 15.076 5.5 13.56H3.748l-.24 1.516H1.24v-.027L3.383 4.898h2.47l2.144 10.145v.027l-2.256.006ZM4.627 8.18l-.56 3.462h1.116L4.626 8.18ZM8.402 15.078V4.904h2.264v8.136h2.663v2.038H8.402ZM13.808 15.076V4.904h2.263v8.136h2.664v2.038l-4.927-.002Z' fill='%23fff'/%3e%3c/g%3e%3cdefs%3e%3cclipPath id='ageAll'%3e%3cpath fill='%23fff' d='M0 0h20v20H0z'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-attachment: scroll;
+}
+#main > .main-container > .main > .section .body .content > .movie > .item-container > .text > .rating.none {
+  background-image: url("data:image/svg+xml;charset=UTF-8, %3csvg width='20' height='21' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M17.745 20.002H2.255A2.254 2.254 0 0 1 0 17.747V2.255A2.253 2.253 0 0 1 2.255 0h15.49A2.253 2.253 0 0 1 20 2.255v15.492a2.254 2.254 0 0 1-2.255 2.255Z' fill='%23666'/%3e%3cpath d='M9.018 14.79V5.88h-1.17v8.91h1.17Zm-3.91-3.2h-1.88V7.63h1.88v3.96Zm1.18-4.89h-4.23v5.82h4.23V6.7Zm11.442 6.31c0-1.11-1.15-1.79-3.12-1.79-1.97 0-3.12.68-3.12 1.79 0 1.08 1.15 1.76 3.12 1.76 1.97 0 3.12-.68 3.12-1.76Zm-7.12-5.54h1.77c-.07 1.27-.89 2.21-2.14 2.66.24.3.46.6.7.91.86-.3 1.8-1.14 2.07-2 .38.81 1.25 1.48 1.93 1.74.21-.31.43-.61.63-.92-.97-.32-1.87-1.15-1.96-2.39h1.69v-.96h-4.69v.96Zm4.55 1.48h1.34v2.23h1.17v-5.3H16.5v2.13h-1.34v.94Zm-.55 3.21c1.23 0 1.93.31 1.93.85 0 .52-.7.83-1.93.83-1.21 0-1.92-.31-1.92-.83 0-.54.71-.85 1.92-.85Z' fill='%23fff'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-attachment: scroll;
+}
+#main > .main-container > .main > .section .body .content > .movie > .item-container > .text > .name {
+  width: 12rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+#main > .main-container > .main > .section .body .content > .movie > .item-container.none {
+  opacity: 0.25;
+}
+#main > .main-container > .main > .section .body .content > .movie > .item-container.select {
+  background-color: #333;
+  border-color: #000;
+  color: #ffffff;
+}
+#main > .main-container > .main > .section .body .content > .movie > .item-container.select > .text {
+  border-color: #5c5c5c;
+}
+#main > .main-container > .main > .section .body.theater > .content {
+  display: flex;
+  flex-direction: row;
+}
+#main > .main-container > .main > .section .body.theater > .content > .region-container {
+  width: 50%;
+}
+#main > .main-container > .main > .section .body.theater > .content > .region-container > .region {
+  padding: 0.5rem;
+  margin-bottom: 0.1rem;
+  background-color: #e6e4d9;
+  font-size: 0.75rem;
+  cursor: pointer;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+#main > .main-container > .main > .section .body.theater > .content > .region-container > .region.select {
+  background-image: url("https://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/step1/theaterarealist_item_selected.png");
+  background-repeat: no-repeat;
+  background-position: right;
+  background-color: transparent;
+}
+#main > .main-container > .main > .section .body.theater > .content > .theater-container {
+  width: 50%;
+  overflow-y: auto;
+}
+#main > .main-container > .main > .section .body.theater > .content > .theater-container::-webkit-scrollbar {
+  width: 10px; /* 스크롤바 너비 */
+}
+#main > .main-container > .main > .section .body.theater > .content > .theater-container::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.5); /* 스크롤바의 색상 */
+  border-radius: 5px; /* 둥근 모서리 */
+  height: 10%;
+}
+#main > .main-container > .main > .section .body.theater > .content > .theater-container > .theater {
+  width: 100%;
+  height: 30px;
+  font-weight: 600;
+  border: 0.1rem solid transparent;
+  box-sizing: border-box;
+  line-height: 1;
+  cursor: pointer;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#main > .main-container > .main > .section .body.theater > .content > .theater-container > .theater > .text {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 0.4rem;
+  border: 0.1rem solid transparent;
+}
+#main > .main-container > .main > .section .body.theater > .content > .theater-container > .theater.none {
+  opacity: 0.25;
+}
+#main > .main-container > .main > .section .body.theater > .content > .theater-container > .theater.select {
+  background-color: #333;
+  border-color: #000;
+  color: #ffffff;
+}
+#main > .main-container > .main > .section .body.theater > .content > .theater-container > .theater.select > .text {
+  border-color: #5c5c5c;
+}
+#main > .main-container > .main > .section .body.day > .content {
+  padding: 0.5rem 0.5rem;
+  height: 100%;
+  overflow-y: auto;
+  box-sizing: border-box;
+  /* 스크롤바 전체 영역 */
+  /* 전체 스크롤바 스타일 */
+}
+#main > .main-container > .main > .section .body.day > .content::-webkit-scrollbar {
+  width: 10px; /* 스크롤바 너비 */
+}
+#main > .main-container > .main > .section .body.day > .content::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.5); /* 스크롤바의 색상 */
+  border-radius: 5px; /* 둥근 모서리 */
+  height: 10%;
+}
+#main > .main-container > .main > .section .body.day > .content > .content-container > .day-container {
+  height: auto;
+  border: 0.1rem solid transparent;
+  box-sizing: border-box;
+}
+#main > .main-container > .main > .section .body.day > .content > .content-container > .day-container > .title {
+  padding-top: 1rem;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#main > .main-container > .main > .section .body.day > .content > .content-container > .day-container > .title > .year, #main > .main-container > .main > .section .body.day > .content > .content-container > .day-container > .title .month {
+  color: #666;
+  font-weight: 600;
+}
+#main > .main-container > .main > .section .body.day > .content > .content-container > .day-container > .title > .year {
+  font-size: 0.8rem;
+}
+#main > .main-container > .main > .section .body.day > .content > .content-container > .day-container > .title > .month {
+  font-size: 2.5rem;
+  padding: 0;
+}
+#main > .main-container > .main > .section .body.day > .content > .content-container > .day-container > .day {
+  border: 0.1rem solid transparent;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+#main > .main-container > .main > .section .body.day > .content > .content-container > .day-container > .day > .day-container {
+  padding: 0.5rem 0.5rem;
+  border: 0.1rem solid transparent;
+  display: flex;
+  flex-direction: row;
+}
+#main > .main-container > .main > .section .body.day > .content > .content-container > .day-container > .day > .day-container > .week.saturday {
+  color: #31597e;
+}
+#main > .main-container > .main > .section .body.day > .content > .content-container > .day-container > .day > .day-container > .week.sunday {
+  color: #ad2727;
+}
+#main > .main-container > .main > .section .body.day > .content > .content-container > .day-container > .day > .day-container > .date {
+  font-weight: 600;
+}
+#main > .main-container > .main > .section .body.day > .content > .content-container > .day-container > .day > .day-container > .date.saturday {
+  color: #31597e;
+}
+#main > .main-container > .main > .section .body.day > .content > .content-container > .day-container > .day > .day-container > .date.sunday {
+  color: #ad2727;
+}
+#main > .main-container > .main > .section .body.day > .content > .content-container > .day-container > .day.none {
+  opacity: 0.25;
+}
+#main > .main-container > .main > .section .body.day > .content > .content-container > .day-container > .day.select {
+  background-color: #333;
+  border-color: #000;
+  color: #ffffff;
+}
+#main > .main-container > .main > .section .body.day > .content > .content-container > .day-container > .day.select > .day-container {
+  border-color: #5c5c5c;
+}
+#main > .main-container > .main > .section .body.day > .content > .content-container > .day-container > .day.select > .day-container > .week.saturday {
+  color: #ffffff;
+}
+#main > .main-container > .main > .section .body.day > .content > .content-container > .day-container > .day.select > .day-container > .week.sunday {
+  color: #ffffff;
+}
+#main > .main-container > .main > .section .body.day > .content > .content-container > .day-container > .day.select > .day-container > .date.saturday {
+  color: #ffffff;
+}
+#main > .main-container > .main > .section .body.day > .content > .content-container > .day-container > .day.select > .day-container > .date.sunday {
+  color: #ffffff;
+}
+#main > .main-container > .main > .section .body.time > .content {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+#main > .main-container > .main > .section .body.time > .content.hidden {
+  display: none;
+}
+#main > .main-container > .main > .section .body.time > .content > .notice {
+  color: #666;
+}
+#main > .main-container > .main > .section .body.time > .time-container {
+  box-sizing: border-box;
+  height: 100%;
+  padding: 1rem 1rem;
+}
+#main > .main-container > .main > .section .body.time > .time-container > .time-table {
+  border-top: 0.15rem solid #cfcdc3;
+  padding-bottom: 1rem;
+}
+#main > .main-container > .main > .section .body.time > .time-container > .time-table > .title {
+  padding: 0.5rem 0;
+  cursor: text;
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+}
+#main > .main-container > .main > .section .body.time > .time-container > .time-table > .title > .cinema-type {
+  font-weight: 700;
+  color: #b54d15;
+}
+#main > .main-container > .main > .section .body.time > .time-container > .time-table > .title > .cinema {
+  color: #333;
+  font-weight: 700;
+}
+#main > .main-container > .main > .section .body.time > .time-container > .time-table > .title > .seat {
+  color: #666;
+}
+#main > .main-container > .main > .section .body.time > .time-container > .time-table > .times {
+  width: 309px;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+#main > .main-container > .main > .section .body.time > .time-container > .time-table > .times > .item {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+#main > .main-container > .main > .section .body.time > .time-container > .time-table > .times > .item.select > .time {
+  background-color: #333;
+  border-color: #000;
+  color: #ffffff;
+}
+#main > .main-container > .main > .section .body.time > .time-container > .time-table > .times > .item.select > .time > .text {
+  border-color: #5c5c5c;
+}
+#main > .main-container > .main > .section .body.time > .time-container > .time-table > .times > .item > .time {
+  border: 0.1rem solid #d6d3ce;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-weight: 700;
+  color: #333;
+}
+#main > .main-container > .main > .section .body.time > .time-container > .time-table > .times > .item > .time > .text {
+  width: 2.5rem;
+  border: 0.15rem solid transparent;
+  text-align: center;
+  padding: 0.1rem;
+}
+#main > .main-container > .main > .section .body.time > .time-container > .time-table > .times > .item > .seat {
+  color: #3d7c35;
+}
+
+#whiteBlow {
+  position: absolute;
+  width: 100%;
+  height: 70rem;
+  filter: blur(200rem);
+  background-color: white;
+  z-index: 1;
+  top: 242px;
+  left: 0;
+}
+#whiteBlow.hidden {
+  display: none;
+}
+
+.button-container {
+  width: 61.25rem;
+  text-align: center;
+  color: rgb(51, 51, 51);
+  font-weight: 400;
+  height: 4rem;
+  padding: 0 0.09rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+}
+.button-container > .content-bar-timetable, .button-container .content-bar-retry {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 1.875rem;
+  width: 101px;
+  color: rgb(51, 51, 51);
+  background-color: #f2f0e5;
+  font-weight: 600;
+  font-size: 0.75rem;
+}
+.button-container > .content-bar-timetable {
+  background-image: url("https://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/top_buttons.png");
+  background-repeat: no-repeat;
+  background-position: 0 -90px;
+}
+.button-container > .content-bar-retry {
+  width: 113px;
+  background-image: url("https://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/top_buttons.png");
+  background-repeat: no-repeat;
+  background-position: 0 -120px;
+}
+
+#main-seat > .seat-div {
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 61.25rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+}
+#main-seat > .seat-div .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: rgb(51, 51, 51);
+  color: #d4d3c9;
+  font-weight: 400;
+  height: 2rem;
+  width: 100%;
+  padding: 0 0.09rem;
+}
+#main-seat > .seat-div .screen-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  border: 0.1rem solid #d4d3c9;
+  background-color: #f2f0e5;
+  height: auto;
+}
+#main-seat > .seat-div .screen-container.screen-down {
+  height: 24.0625rem;
+}
+#main-seat > .seat-div .screen-container .info-container {
+  margin: 1rem;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: auto;
+}
+#main-seat > .seat-div .screen-container .info-container.title-right-box {
+  gap: 1rem;
+}
+#main-seat > .seat-div .screen-container .info-container#nopContainer {
+  border-right: 1px solid #d4d3c9;
+}
+#main-seat > .seat-div .screen-container .info-container #maximum_people {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  font-size: 0.6875rem;
+  padding-right: 1rem;
+  box-sizing: border-box;
+  color: rgb(255, 0, 0);
+}
+#main-seat > .seat-div .screen-container .info-container .title-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.2rem;
+  box-sizing: border-box;
+}
+#main-seat > .seat-div .screen-container .info-container .title-container > .text {
+  width: auto;
+  height: 1rem;
+  font-size: 0.75rem;
+  padding: 0 0.5rem;
+}
+#main-seat > .seat-div .screen-container .info-container .title-container > .text.center {
+  border-right: 1px solid #d4d3c9;
+  border-left: 1px solid #d4d3c9;
+}
+#main-seat > .seat-div .screen-container .info-container .title-container > .big-text {
+  font-weight: 700;
+  font-size: 1.28rem;
+}
+#main-seat > .seat-div .screen-container .info-container .title-container .title {
+  width: 3rem;
+}
+#main-seat > .seat-div .screen-container .info-container .title-container > .adult {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  list-style-type: none;
+  gap: 0.3rem;
+  box-sizing: border-box;
+}
+#main-seat > .seat-div .screen-container .info-container .title-container > .adult > .selected {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #d6d3ce;
+  width: 1.35rem;
+  height: 1.35rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+#main-seat > .seat-div .screen-container .info-container .title-container > .adult > .selected > .adults {
+  display: none;
+}
+#main-seat > .seat-div .screen-container .info-container .title-container > .adult > .selected > .-adult {
+  color: rgb(51, 51, 51);
+  text-decoration: none;
+  cursor: pointer;
+}
+#main-seat > .seat-div .screen-container .info-container .title-container > .adult > .selected:has(.adults:checked) {
+  background-color: rgb(51, 51, 51);
+  color: rgb(255, 255, 255);
+}
+#main-seat > .seat-div .screen-container .info-container .text {
+  padding: 0 0.3rem;
+}
+#main-seat > .seat-div .screen-container .info-container .cinema {
+  border-right: 0.025rem solid #d4d3c9;
+  border-left: 0.025rem solid #d4d3c9;
+}
+#main-seat > .seat-div .screen-container .info-container .seat-color {
+  color: red;
+}
+#main-seat > .seat-div .screen-container > .seat-container {
+  width: 55rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 5rem;
+}
+#main-seat > .seat-div .screen-container > .seat-container > .screen-bar {
+  margin-top: 1rem;
+  margin-bottom: 4rem;
+  width: 40rem;
+  background-color: #d4d3c9;
+  text-align: center;
+}
+#main-seat > .seat-div .screen-container > .seat-container > .screen th, #main-seat > .seat-div .screen-container > .seat-container > .screen td {
+  text-align: center;
+  border: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  margin-bottom: 4rem;
+}
+#main-seat > .seat-div .screen-container > .seat-container > .screen th.seat, #main-seat > .seat-div .screen-container > .seat-container > .screen td.seat {
+  cursor: pointer;
+  background-color: #d4d3c9;
+}
+#main-seat > .seat-div .screen-container > .seat-container > .screen th.selected-seat, #main-seat > .seat-div .screen-container > .seat-container > .screen td.selected-seat {
+  background-color: red;
+}
+#main-seat > .seat-div .screen-container > .plus {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-bottom: 5rem;
+}
+#main-seat > .seat-div .screen-container > .plus > span {
+  gap: 0.1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+#main-seat > .seat-div .screen-container > .plus > span > .icon {
+  display: flex;
+  width: 1rem;
+  height: 1rem;
+}
+#main-seat > .seat-div .screen-container > .plus > span > .icon.icon1 {
+  background-color: red;
+}
+#main-seat > .seat-div .screen-container > .plus > span > .icon.icon2 {
+  background-color: #d4d3c9;
+}
+
+#main-payment {
+  box-sizing: border-box;
+  width: 61.25rem;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: #f2f0e5;
+}
+#main-payment > .left-container {
+  box-sizing: border-box;
+  height: 100%;
+  width: 46.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+#main-payment > .left-container > .payment-bar {
+  background-color: rgb(29, 29, 28);
+  width: 100%;
+  height: 2.06rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  color: rgb(224, 224, 224);
+  font-weight: 700;
+  border-bottom: 0.1rem solid #cccccc;
+}
+#main-payment > .left-container > .payment-container {
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 0.1rem solid #cccccc;
+}
+#main-payment > .left-container > .payment-container > label {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 1rem;
+  gap: 1rem;
+  list-style-type: none;
+  cursor: pointer;
+}
+#main-payment > .left-container > .payment-container > label .payment-label {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  list-style-type: none;
+  height: 2.6rem;
+}
+#main-payment > .left-container > .payment-container > label .payment-label > .payment-check {
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: 0 0.5rem;
+  color: rgb(51, 51, 51);
+  text-decoration: none;
+  cursor: pointer;
+  border-bottom: 0.1rem solid #cccccc;
+}
+#main-payment > .left-container > .payment-container > .payment-label:has(.radio:checked) {
+  background-color: rgb(51, 51, 51);
+  color: rgb(255, 255, 255);
+}
+#main-payment > .left-container > .card-container {
+  width: 100%;
+  height: 100%;
+}
+#main-payment > .left-container > .card-container > .card-content {
+  padding-left: 3rem;
+  height: 3rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  border-bottom: 0.1rem solid #cccccc;
+  gap: 1rem;
+}
+#main-payment > .left-container > .card-container > .card-content > .card-label {
+  height: 3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 0.2rem;
+}
+#main-payment > .left-container > .card-container > .card-content > .card-label > [name=card] {
+  height: 1.5rem;
+  border-radius: 0.2rem;
+}
+#main-payment > .left-container > .card-container > .text-space {
+  width: 100%;
+  height: 15rem;
+}
+#main-payment > .left-container > .card-container > .card-text {
+  box-sizing: border-box;
+  height: calc(100% - 6rem);
+  padding: 1.5rem 0 1.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  background-color: rgb(235, 233, 223);
+}
+#main-payment > .left-container > .card-container > .card-text > .text {
+  color: rgb(51, 51, 51);
+}
+#main-payment > .left-container > .card-container > .card-text > .text.bottom-line {
+  gap: 1rem;
+  display: flex;
+  flex-direction: row;
+}
+#main-payment > .left-container > .card-container > .card-text > .text.bottom-line > a {
+  color: rgb(51, 51, 51);
+  text-decoration: underline;
+}
+#main-payment > .left-container > .cellphone-container {
+  width: 100%;
+  height: 100%;
+}
+#main-payment > .left-container > .cellphone-container > .text-space {
+  height: 5rem;
+  width: 100%;
+}
+#main-payment > .left-container > .cellphone-container > .cellphone-content {
+  padding-left: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+#main-payment > .left-container > .cellphone-container > .cellphone-content > .text {
+  height: 2rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 0.1rem solid #cccccc;
+}
+#main-payment > .left-container > .cellphone-container > .cellphone-content > .text > .cellphone-pay {
+  font-size: 1rem;
+  font-weight: 2000;
+}
+#main-payment > .left-container > .cellphone-container > .cellphone-content > .text > .text {
+  width: 5rem;
+}
+#main-payment > .left-container > .cellphone-container > .cellphone-text {
+  height: calc(100% - 4rem);
+  gap: 0.2rem;
+  padding-left: 8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-bottom: 3rem;
+}
+#main-payment > .left-container > .cellphone-container > .cellphone-text > .text-space {
+  padding: 0.5rem 0;
+}
+#main-payment > .left-container > .cellphone-container > .cellphone-text > h5 {
+  color: red;
+}
+#main-payment > .left-container > .simple-pay-container {
+  width: 100%;
+  height: 100%;
+}
+#main-payment > .left-container > .simple-pay-container > .label-radio {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 0.1rem solid #cccccc;
+  width: 100%;
+  padding-left: 1rem;
+  cursor: pointer;
+}
+#main-payment > .left-container > .simple-pay-container > .label-radio > .simple-pay-label {
+  height: 3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+}
+#main-payment > .left-container > .simple-pay-container > .label-radio > .simple-pay-label > [name=simple-pay-check] {
+  height: 1.5rem;
+  border-radius: 0.2rem;
+  cursor: pointer;
+}
+#main-payment > .left-container > .simple-pay-container > .simple-pay-text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+}
+#main-payment > .left-container > .simple-pay-container > .simple-pay-text-container > .label-checkbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  list-style-type: none;
+  padding-left: 1.5rem;
+  height: 3rem;
+  color: rgb(198, 36, 36);
+  gap: 0.2rem;
+}
+#main-payment > .left-container > .simple-pay-container > .simple-pay-text-container > .text-space {
+  height: 3rem;
+  width: 100%;
+}
+#main-payment > .left-container > .simple-pay-container > .simple-pay-text-container > .simple-pay-on-text {
+  padding: 1.5rem 0 1.5rem 8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+#main-payment > .left-container > .simple-pay-container > .simple-pay-text-container > .simple-pay-on-text > h4 {
+  padding-bottom: 1rem;
+}
+#main-payment > .left-container > .simple-pay-container > .simple-pay-text-container > .simple-pay-on-text > .text {
+  height: 4rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  width: 100%;
+}
+#main-payment > .left-container > .simple-pay-container > .simple-pay-text-container > .simple-pay-under-text {
+  width: 100%;
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(235, 233, 223);
+  gap: 0.2rem;
+}
+#main-payment > .left-container > .simple-pay-container > .simple-pay-text-container > .simple-pay-under-text > h5 {
+  color: red;
+}
+#main-payment > .left-container > .credit-container {
+  width: 100%;
+  height: 100%;
+}
+#main-payment > .left-container > .credit-container > .text-space {
+  height: 5rem;
+  width: 100%;
+}
+#main-payment > .left-container > .credit-container > .credit-content {
+  padding: 1.5rem 0 1.5rem 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+#main-payment > .left-container > .credit-container > .credit-content > h4 {
+  padding-bottom: 1rem;
+}
+#main-payment > .left-container > .credit-container > .credit-content > .text {
+  height: 2rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  width: 100%;
+}
+#main-payment > .left-container > .credit-container > .text-space {
+  width: 100%;
+  height: 5rem;
+}
+#main-payment > .left-container > .credit-container > .credit-text {
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(235, 233, 223);
+}
+#main-payment > .left-container > .credit-container > .credit-text > h4 {
+  color: red;
+}
+#main-payment > .left-container > .toss-container {
+  width: 100%;
+  height: 100%;
+}
+#main-payment > .left-container > .toss-container > .text-space {
+  height: 5rem;
+  width: 100%;
+}
+#main-payment > .left-container > .toss-container > .toss-content {
+  padding: 1.5rem 0 1.5rem 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+#main-payment > .left-container > .toss-container > .toss-content > h4 {
+  padding-bottom: 1rem;
+}
+#main-payment > .left-container > .toss-container > .toss-content > .text {
+  height: 2rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  width: 100%;
+}
+#main-payment > .left-container > .toss-container > .text-space {
+  height: 7rem;
+  width: 100%;
+}
+#main-payment > .left-container > .toss-container > .toss-text {
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(235, 233, 223);
+}
+#main-payment > .left-container > .toss-container > .toss-text > h4 {
+  color: red;
+}
+#main-payment > .right-container {
+  width: 16rem;
+  height: auto;
+  background-color: inherit;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+#main-payment > .right-container > .space {
+  width: 2rem;
+  height: 100%;
+}
+#main-payment > .right-container > .pay-container {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0;
+  gap: 1rem;
+}
+#main-payment > .right-container > .pay-container > .pay-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: rgb(51, 51, 51);
+  width: 11.7rem;
+  text-align: left;
+  border: 0.2rem solid rgb(45, 31, 25);
+  border-radius: 0.1rem;
+}
+#main-payment > .right-container > .pay-container > .pay-box > .pay-title {
+  text-align: center;
+  background-color: #f2f0e5;
+  font-size: 1rem;
+  font-weight: 700;
+  width: 100%;
+  padding: 0.4rem 0;
+}
+#main-payment > .right-container > .pay-container > .pay-box > .pay-title-blue {
+  text-align: center;
+  background-color: rgb(217, 231, 235);
+  font-size: 1rem;
+  font-weight: 700;
+  width: 100%;
+  padding: 0.4rem 0;
+}
+#main-payment > .right-container > .pay-container > .pay-box > .pay-content {
+  padding: 0.4rem 0;
+  background-color: white;
+  width: 100%;
+  display: flex;
+}
+#main-payment > .right-container > .pay-container > .pay-box > .pay-content > .pay-kind {
+  padding-left: 0.2rem;
+  width: 100%;
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-align: left;
+}
+#main-payment > .right-container > .pay-container > .pay-box > .pay-content > .pay-price {
+  padding-right: 0.2rem;
+  width: 100%;
+  text-align: right;
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+#main-payment > .right-container > .pay-container > .pay-box > .pay-text {
+  padding: 0.4rem 0;
+  background-color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  width: 100%;
+  border: 0.2rem solid rgb(45, 31, 25);
+  text-align: center;
+}
+#main-payment > .right-container > .pay-container > .pay-box > .pay-price-box {
+  padding: 0.4rem 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+#main-payment > .right-container > .pay-container > .pay-box > .pay-price-box.blue-color {
+  background-color: rgb(36, 46, 53);
+  color: rgb(137, 229, 255);
+}
+#main-payment > .right-container > .pay-container > .pay-box > .pay-price-box.yellow-color {
+  color: #faec8c;
+  background-color: rgb(45, 31, 25);
+}
+#main-payment > .right-container > .pay-container > .pay-box > .pay-price-box.basic-color {
+  color: white;
+  background-color: rgb(32, 32, 32);
+}
+#main-payment > .right-container > .pay-container > .pay-box > .pay-price-box > .pay-big-price {
+  font-size: 1.5rem;
+  font-weight: 2000;
+}
+#main-payment > .right-container > .pay-container > .pay-box > .pay-price-box > .pay-small-price {
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+
+#payment-section {
+  background-color: rgb(246, 246, 244);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 0.5rem solid rgb(112, 112, 112);
+  width: 61.25rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+#payment-section.hidden {
+  display: none;
+}
+#payment-section > h4 {
+  padding: 0.5rem 0 0.1rem 0.2rem;
+  text-align: left;
+  background-color: rgb(112, 112, 112);
+  color: rgb(242, 240, 229);
+  font-weight: 700;
+  font-size: 1.25rem;
+  width: 100%;
+  height: 2.15rem;
+}
+#payment-section > .pay-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: calc(100% - 4rem);
+  padding: 3rem 1rem 3rem 1rem;
+}
+#payment-section > .pay-form > .title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+#payment-section > .pay-form > .title > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 0.1rem solid rgb(190, 190, 189);
+  border-bottom: 0.1rem solid rgb(190, 190, 189);
+  background-color: rgb(238, 238, 236);
+  height: 2rem;
+  width: 100%;
+}
+#payment-section > .pay-form > .title > div > .title {
+  height: 100%;
+  width: 100%;
+  text-align: left;
+  font-size: 1.4rem;
+  font-weight: 2000;
+}
+#payment-section > .pay-form > .title > div > .title.title2 {
+  border-left: 0.1rem solid rgb(190, 190, 189);
+}
+#payment-section > .pay-form > .title > div > .title > .small-text {
+  width: 100%;
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+#payment-section > .pay-form > .table-div {
+  height: 10rem;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 0.1rem solid rgb(190, 190, 189);
+}
+#payment-section > .pay-form > .table-div > div > .img {
+  height: 9.7rem;
+  width: 6.875rem;
+}
+#payment-section > .pay-form > .table-div > .div-title1 {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 5rem;
+  gap: 0.2rem;
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+#payment-section > .pay-form > .table-div > .div-content1 {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 20.07rem;
+  gap: 0.2rem;
+  font-weight: 400;
+  font-size: 0.75rem;
+  border-right: 0.1rem solid rgb(190, 190, 189);
+}
+#payment-section > .pay-form > .table-div > .div-title2 {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 8.43rem;
+  padding-left: 3rem;
+  gap: 0.2rem;
+  margin-bottom: 5rem;
+  font-weight: 400;
+  font-size: 0.75rem;
+}
+#payment-section > .pay-form > .table-div > .div-content2 {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 21rem;
+  gap: 0.2rem;
+  margin-bottom: 5rem;
+  font-weight: 400;
+  font-size: 0.75rem;
+}
+#payment-section > .pay-form > .table-div > .div-content2 > span > .big-red {
+  font-size: 1rem;
+  font-weight: 700;
+  color: red;
+}
+#payment-section > .pay-form > .table-div > .div-content2 > span > .big-font {
+  font-weight: 700;
+}
+#payment-section > .pay-form > .table-div > .div-content2 > span > .small-red {
+  color: red;
+}
+#payment-section > .pay-form > .cancel {
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+#payment-section > .pay-form > .cancel > button {
+  border: none;
+  padding-left: 1rem;
+  background-color: inherit;
+  cursor: pointer;
+  color: #6868ec;
+  text-decoration: underline;
+}
+#payment-section > .pay-form > .agree {
+  border-top: 0.1rem solid rgb(190, 190, 189);
+  border-bottom: 0.1rem solid rgb(190, 190, 189);
+  background-color: rgb(238, 238, 238);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  padding: 1rem 0 1rem 0;
+  gap: 0.2rem;
+}
+#payment-section > .pay-form > .agree > div.agree-div1 {
+  width: 23.15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 2rem;
+  gap: 0.3rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+#payment-section > .pay-form > .agree > div.agree-div1 label {
+  cursor: pointer;
+}
+#payment-section > .pay-form > .agree > div.agree-div1 > .agree-all {
+  font-weight: 700;
+  padding-bottom: 0.2rem;
+}
+#payment-section > .pay-form > .agree > div.agree-div2 {
+  width: 6.475rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  border-right: 0.1rem solid rgb(190, 190, 189);
+}
+#payment-section > .pay-form > .agree > div.agree-div2 > span {
+  height: 0.95rem;
+}
+#payment-section > .pay-form > .agree > div.agree-div2 > button {
+  border: none;
+  background-color: inherit;
+  cursor: pointer;
+  color: #6868ec;
+  text-decoration: underline;
+  font-size: 0.75rem;
+}
+#payment-section > .pay-form > .agree > div.agree-div3 {
+  margin-left: 2rem;
+  width: 31.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+#payment-section > .pay-form > .agree > div > label {
+  display: flex;
+  flex-direction: row;
+  gap: 0.2rem;
+  cursor: pointer;
+}
+#payment-section > .pay-form > .agree > div > label.agree-label {
+  margin-left: 0.5rem;
+}
+#payment-section > .pay-form > .agree > div > a {
+  color: rgb(32, 124, 202);
+  text-decoration-line: underline;
+  text-decoration-color: rgb(32, 124, 202);
+  text-decoration-style: solid;
+  font-weight: 400;
+  font-size: 0.75rem;
+}
+
+#pay-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+#pay-button > .real-pay {
+  width: 8.125rem;
+  height: 2.8125rem;
+  background-color: red;
+  color: white;
+  margin: 0.2rem;
+  border: 0.1rem solid white;
+  border-radius: 0.2rem;
+  cursor: pointer;
+}
+#pay-button > .real-cancel {
+  height: 2.8125rem;
+  width: 4.6785rem;
+  border: 0.1rem solid rgb(51, 51, 51);
+  border-radius: 0.2rem;
+  cursor: pointer;
+}
+
+.control-bar {
+  width: 100%;
+  background-color: rgb(29, 29, 28);
+  height: 7.5rem;
+  box-sizing: border-box;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.control-bar > .container {
+  width: 980px;
+  max-width: 980px;
+  min-width: 980px;
+  height: 100%;
+  padding: 10px 0;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.control-bar > .container > .info {
+  user-select: none;
+  pointer-events: none;
+}
+.control-bar > .container > .info.hidden {
+  display: none;
+}
+.control-bar > .container > .containers {
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.control-bar > .container > .containers > .movie-container {
+  width: 210px;
+  height: 100%;
+  background-image: url("https://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/tnb/tnb_steps.png");
+  background-repeat: no-repeat;
+  background-position: 50% 40px;
+}
+.control-bar > .container > .containers > .movie-container.hidden {
+  display: none;
+}
+.control-bar > .container > .containers > .info {
+  user-select: none;
+  pointer-events: none;
+}
+.control-bar > .container > .containers > .info.hidden {
+  display: none;
+}
+.control-bar > .container > .containers > .posters {
+  width: 210px;
+  height: 100%;
+  box-sizing: border-box;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+.control-bar > .container > .containers > .posters > .poster > .movie {
+  width: 74px;
+  height: 100%;
+}
+.control-bar > .container > .containers > .posters > .movie-info {
+  height: 100%;
+  padding: 1rem 0 1rem 1rem;
+  color: #cccccc;
+  box-sizing: border-box;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+}
+.control-bar > .container > .containers > .posters > .movie-info > .title {
+  pointer-events: all;
+  color: #cccccc;
+}
+.control-bar > .container > .containers > .posters > .movie-info > .title:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+.control-bar > .container > .containers > .posters > .movie-info > .unique-rating.hidden {
+  display: none;
+}
+.control-bar > .container > .theater-container {
+  width: 185px;
+  height: 100%;
+  background-image: url("https://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/tnb/tnb_steps.png");
+  background-repeat: no-repeat;
+  background-position: 50% -68px;
+}
+.control-bar > .container > .theater-container.hidden {
+  display: none;
+}
+.control-bar > .container > .seat-container {
+  width: 111px;
+  height: 100%;
+  margin: 2rem 0 0 1.5rem;
+  background-image: url("https://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/tnb/tnb_steps.png");
+  background-repeat: no-repeat;
+  background-position: 50% -190px;
+}
+.control-bar > .container > .seat-container.hidden {
+  display: none;
+}
+.control-bar > .container > .seat-container {
+  width: 111px;
+  height: 100%;
+  margin: 2rem 0 0 1.5rem;
+  background-image: url("https://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/tnb/tnb_steps.png");
+  background-repeat: no-repeat;
+  background-position: 50% -190px;
+}
+.control-bar > .container > .seat-container.hidden {
+  display: none;
+}
+.control-bar > .container > .theater {
+  width: 185px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  justify-content: center;
+}
+.control-bar > .container > .theater > .text {
+  padding-left: 0.5rem;
+  color: #cccccc;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 0.1rem;
+}
+.control-bar > .container > .theater > .text > .head {
+  width: 2.2rem;
+  font-size: 0.8rem;
+}
+.control-bar > .container > .theater > .text:nth-child(1) {
+  pointer-events: all;
+}
+.control-bar > .container > .theater > .text:nth-child(1) > .data:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+.control-bar > .container > .theater > .text > .data {
+  color: #cccccc;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.control-bar > .container > .seat {
+  padding-top: 2.1rem;
+  width: 171px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  justify-content: flex-start;
+}
+.control-bar > .container > .seat > .text {
+  width: 100%;
+  padding-left: 0.5rem;
+  color: #cccccc;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 0.1rem;
+}
+.control-bar > .container > .seat > .text > .head {
+  width: 61px;
+  font-size: 0.8rem;
+}
+.control-bar > .container > .seat > .text > .data {
+  color: #cccccc;
+  font-size: 0.8rem;
+  font-weight: 700;
+  width: 110px;
+}
+.control-bar > .container > .price {
+  padding-top: 2.1rem;
+  width: 171px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  justify-content: flex-start;
+}
+.control-bar > .container > .price > .text {
+  width: 100%;
+  padding-left: 0.5rem;
+  color: #cccccc;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 0.1rem;
+}
+.control-bar > .container > .price > .text > .head {
+  width: 61px;
+  font-size: 0.8rem;
+}
+.control-bar > .container > .price > .text > .data {
+  color: #cccccc;
+  font-size: 0.8rem;
+  font-weight: 700;
+  width: 110px;
+}
+.control-bar > .container > .price > .text > .data2 {
+  color: red;
+  font-size: 0.8rem;
+  font-weight: 700;
+  width: 110px;
+}
+.control-bar > .container > .payment-container {
+  width: 71px;
+  height: 100%;
+  margin: 2rem 0 0 1.5rem;
+  background-image: url("https://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/tnb/tnb_steps.png");
+  background-repeat: no-repeat;
+  background-position: 50% -298px;
+}
+.control-bar > .container > .payment-container.hidden {
+  display: none;
+}
+.control-bar > .container .left-button {
+  width: 106px;
+  height: 108px;
+  cursor: pointer;
+  margin-right: 1rem;
+  background-image: url("http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/tnb/tnb_buttons.png");
+  background-repeat: no-repeat;
+}
+.control-bar > .container .left-button.hidden {
+  display: none;
+}
+.control-bar > .container .left-button.first {
+  background-position: 0 0;
+}
+.control-bar > .container .left-button.second {
+  background-position: 0 -110px;
+}
+.control-bar > .container .right-button {
+  right: 0;
+  width: 106px;
+  height: 108px;
+  position: absolute;
+  cursor: pointer;
+  background-image: url("http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/tnb/tnb_buttons.png");
+  background-repeat: no-repeat;
+}
+.control-bar > .container .right-button.hidden {
+  display: none;
+}
+.control-bar > .container .right-button.first {
+  background-position: 0 -220px;
+}
+.control-bar > .container .right-button.first.after {
+  background-position: -150px -220px;
+}
+.control-bar > .container .right-button.second {
+  background-position: 0 -330px;
+}
+.control-bar > .container .right-button.second.after {
+  background-position: -150px -330px;
+}
+.control-bar > .container .right-button.third {
+  width: 220px;
+  background-position: 0 -550px;
+}
+
+.add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 61.25rem;
+  height: 13rem;
+}
+.add > a {
+  width: 100%;
+}
+.add > a .image {
+  width: 61.25rem;
+  height: 8.75rem;
+}
+
+/*# sourceMappingURL=index.css.map */

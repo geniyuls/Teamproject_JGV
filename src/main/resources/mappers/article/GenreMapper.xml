@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jykim.project_jgv.mappers.movie.GenreMapper">
+
+    <insert id="insertMovieGenre" useGeneratedKeys="true" keyProperty="geNum" parameterType="com.jykim.project_jgv.entities.movie.GenereEntity">
+        INSERT INTO jgv.genre (ge_name)
+        VALUES (#{geName})
+    </insert>
+
+    <select id="selectGenereIdByName" resultType="Integer">
+        SELECT ge_num
+        FROM jgv.genre
+        WHERE ge_name = #{geName}
+    </select>
+
+    <insert id="insertMovieGenreMapping">
+        INSERT INTO jgv.movie_genere (ge_num, mo_num)
+        VALUES (#{genum}, #{monum})
+    </insert>
+
+    <select id="isMovieGenreMappingExists" resultType="boolean" parameterType="map">
+        SELECT EXISTS(
+            SELECT 1
+            FROM jgv.movie_country
+            WHERE mo_num = #{monum}
+            AND co_num = #{genum}
+        )
+    </select>
+</mapper>

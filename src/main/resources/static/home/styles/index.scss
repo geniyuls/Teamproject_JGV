@@ -1,0 +1,243 @@
+@charset "UTF-8";
+@import "../../fragments/assets/styles/global";
+
+main {
+  @include flex(column, center, center, 2rem);
+  width: 100%;
+  height: auto;
+
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  > .contents {
+    width: 100%;
+    height: 31.125rem;
+    background-color: black;
+
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+
+    > .video_wrapper {
+      width: 980px;
+      height: 100%;
+
+      align-items: flex-start;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      justify-content: center;
+      position: relative;
+      z-index: 3;
+
+
+      > strong {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #ffffff;
+        transform: translateY(-100%);
+        position: absolute;
+        z-index: 3;
+      }
+
+      > span {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #ffffff;
+        transform: translateY(60%);
+        position: relative;
+        z-index: 3;
+      }
+
+      > .link-container {
+
+        background-color: #9e9e9e;
+        border-radius: 1.3rem;
+        color: #343434;
+        cursor: pointer;
+        text-align: center;
+        padding: 0.5rem 1.2rem;
+
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        transform: translateY(170%);
+        z-index: 4;
+
+
+        > a {
+          color: #000000;
+          font-size: 0.875rem;
+          text-decoration: none;
+
+
+        }
+      }
+
+      > video {
+        width: 100%;
+        height: 100%;
+        transform: scale(1.35);
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: absolute;
+        object-fit: cover;
+        z-index: 0;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%);
+        z-index: 2;
+      }
+    }
+  }
+}
+
+#movie-container {
+  width: 980px;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  justify-content: center;
+  margin-top: 3rem;
+  padding: 1rem 2rem;
+
+  > .title-container {
+    @include flex(row, center, flex-start);
+    text-align: center;
+    font-size: 1.25rem;
+    letter-spacing: 0.05rem;
+    font-weight: 700;
+
+    > h2 > a {
+      color: #000000;
+    }
+  }
+
+  > .movie-chart {
+    width: 980px;
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    justify-content: flex-start;
+
+
+    > .movie-wrapper {
+      width: 11rem;
+      height: 16rem;
+
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      justify-content: center;
+
+      > a {
+        > img {
+          border: 1px solid transparent;
+          border-radius: 0.7rem;
+          width: 10.5rem;
+          height: 14.625rem;
+        }
+      }
+
+      > .movie-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+#theater {
+  @include flex(column, center, center, 1.5rem);
+  width: 100%;
+  background-color: #f6f6f6;
+  padding: 2rem 0;
+
+  > .background {
+    width: 980px;
+
+
+    > .title-container {
+      width: 100%;
+      font-size: 1.5rem;
+      padding-bottom: 1rem;
+    }
+
+    > .theater-list {
+      @include flex(row, center, flex-start, 2.3rem);
+      width: 100%;
+
+      > .image-wrapper {
+        width: 100%;
+        height: auto;
+
+        > a {
+
+          > img {
+            width: 500px;
+            height: 260px;
+          }
+        }
+      }
+
+      > .item-container {
+        @include flex(column, center, center);
+        width: 100%;
+        height: 260px;
+
+        > .item {
+          width: 100%;
+          height: 100%;
+          @include flex(row, center, center);
+
+          > .text {
+            width: 100%;
+            @include flex(row, center, center, 1rem);
+            border-bottom: 1px solid #f2f2f2;
+            color: #222222;
+            padding: 1rem 2rem;
+            white-space: nowrap;
+
+            &:hover {
+              border: 1.5px solid #222222;
+              border-radius: 0.5rem;
+              font-weight: 700;
+            }
+
+            > .title {
+              font-size: 1.22rem;
+              font-weight: 500;
+            }
+
+            > .sub-text {
+              font-size: 0.8rem;
+              font-weight: 500;
+              border: 1px solid #f6f6f6;
+              border-radius: 0.3rem;
+              background-color: #f6f6f6;
+              color: #666666;
+              padding: 0.2rem 0.4rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}

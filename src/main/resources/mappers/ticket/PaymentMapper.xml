@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jykim.project_jgv.mappers.ticket.PaymentMapper">
+    <insert id="insertPayment" parameterType="com.jykim.project_jgv.entities.ticket.PaymentEntity">
+        insert jgv.payment (
+            `pa_price`, `pa_state`, `pa_created_at`, `pa_deleted_at`, `us_num`, `me_num`)
+        VALUES (#{paPrice}, #{paState}, #{paCreatedAt}, #{paDeletedAt}, #{usNum}, #{meNum});
+    </insert>
+    <update id="updatePaymentState" parameterType="com.jykim.project_jgv.entities.ticket.PaymentEntity">
+        UPDATE jgv.payment
+        SET pa_state = #{paState}
+        WHERE pa_num = #{paNum}
+    </update>
+    <delete id="deletePayment" parameterType="int">
+        delete
+        from jgv.payment
+        where pa_num = #{paNum}
+          and pa_state = false
+    </delete>
+    <select id="selectPaymentNum" resultType="_int">
+        select payment.pa_num as `paNum`
+        from jgv.payment
+                 left join jgv.reservation on payment.pa_num = reservation.pa_num
+                 left join jgv.screen on reservation.sc_num = screen.sc_num
+                 left join jgv.seat on reservation.se_num = seat.se_num
+                 left join jgv.cinema on seat.ci_num = cinema.ci_num
+                 left join jgv.theater on cinema.th_num = theater.th_num
+                 left join jgv.movie on screen.mo_num = movie.mo_num
+        WHERE mo_title = #{moTitle}
+          AND ci_name = #{ciName}
+          AND th_name = #{thName}
+          and `sc_start_date` LIKE CONCAT('%', #{scStartDate}, '%')
+          and pa_price = #{paPrice}
+          and us_num = #{usNum}
+        limit 1
+    </select>
+</mapper>
