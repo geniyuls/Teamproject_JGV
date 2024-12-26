@@ -32,4 +32,40 @@
         ORDER BY re_num DESC
         LIMIT #{limitCount} OFFSET #{offsetCount}
     </select>
+
+
+    <update id="incrementLikeCount">
+        UPDATE jgv.review
+        SET re_liked = re_liked + 1
+        WHERE re_num = #{reviewId}
+    </update>
+
+    <select id="countUserReviewsForMovie" resultType="_int">
+        SELECT COUNT(*)
+        FROM jgv.review
+        WHERE mo_num = #{movieId}
+        AND us_num = #{userId}
+        AND re_deleted_at IS NULL
+    </select>
+
+    <select id="getReviewsById" resultType="com.jykim.project_jgv.entities.user.ReviewEntity">
+        SELECT re_num AS 'reNum',
+               re_content AS 'reContent',
+               re_created_at AS 'reCreatedAt',
+               re_updated_at AS 'reUpdatedAt',
+               re_deleted_at AS 'reDeletedAt',
+               mo_num AS 'moNum',
+               us_num AS 'usNum',
+               re_liked AS 'reLiked'
+        FROM jgv.review
+        WHERE re_num = #{reviewId}
+    </select>
+
+    <update id="updateReview">
+        UPDATE jgv.review
+        SET re_content = #{reContent},
+            re_updated_at = NOW()
+        WHERE re_num = #{reNum}
+    </update>
+
 </mapper>

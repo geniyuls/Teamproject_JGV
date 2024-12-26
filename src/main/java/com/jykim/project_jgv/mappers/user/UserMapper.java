@@ -1,8 +1,13 @@
 package com.jykim.project_jgv.mappers.user;
 
+import com.jykim.project_jgv.entities.ticket.PaymentEntity;
 import com.jykim.project_jgv.entities.user.UserEntity;
+import com.jykim.project_jgv.vos.user.ReservationVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Mapper
@@ -27,4 +32,12 @@ public interface UserMapper {
                             @Param("usContact") String contact);
 
     int updateUser(UserEntity user);
+
+    // 이메일 미인증 계정 삭제
+    List<UserEntity> selectUnverifiedUsersWithExpiredToken(@Param("now") LocalDateTime now);
+
+    int deleteUserById(@Param("usId") String id);
+
+    ReservationVo[] selectPaymentByUsNum(@Param("usNum") int usNum);
+    ReservationVo[] selectCancelPaymentByUsNum(@Param("usNum") int usNum);
 }

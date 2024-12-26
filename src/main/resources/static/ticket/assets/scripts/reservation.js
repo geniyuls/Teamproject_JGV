@@ -38,7 +38,15 @@ window.onload = () => {
         // 결제 완료 후 예매 정보만 보이도록 설정
         sessionStorage.removeItem('paymentComplete');  // 예매 완료 후 sessionStorage에서 결제 완료 상태 제거
         // 세션 정보 제거 (결제 완료 후)
-        sessionStorage.clear();  // 세션 스토리지의 모든 데이터 제거
-
+        sessionStorage.removeItem('meName');
+        sessionStorage.removeItem('moTitle');
+        sessionStorage.removeItem('ciName');
+        sessionStorage.removeItem('thName');
+        sessionStorage.removeItem('seName');
+        sessionStorage.removeItem('scStartDate');
+        sessionStorage.removeItem('paPrice');
+        sessionStorage.removeItem('human');
+        sessionStorage.removeItem('poster');
+        sessionStorage.removeItem('paymentNumber');
     }
 };

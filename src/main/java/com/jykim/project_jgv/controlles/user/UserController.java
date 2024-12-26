@@ -8,10 +8,13 @@ import com.jykim.project_jgv.exceptions.MessageRemovedException;
 import com.jykim.project_jgv.results.CommonResult;
 import com.jykim.project_jgv.results.Result;
 import com.jykim.project_jgv.services.user.UserService;
+import com.jykim.project_jgv.vos.user.ReservationVo;
 import jakarta.mail.MessagingException;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.apache.catalina.User;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -20,7 +23,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Arrays;
+import java.io.IOException;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/user")
@@ -50,6 +55,7 @@ public class UserController {
         Result result = this.userService.register(request, user);
         JSONObject response = new JSONObject();
         response.put(Result.NAME, result.nameToLower());
+
         return response.toString();
 
     }
@@ -68,34 +74,49 @@ public class UserController {
 // endregion
 
     //     region 로그인
-    @RequestMapping(value = "login", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getLogin(HttpSession session) {
+    @RequestMapping(value = "/login", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getLogin(HttpSession session, @RequestParam(value = "redirect", required = false) String redirect) {
+        // 이미 로그인된 경우
         if (session.getAttribute("user") != null) {
             return new ModelAndView("redirect:/");
         }
-
+        if (redirect != null) {
+            session.setAttribute("redirect", redirect);  // redirect 파라미터를 로그인 페이지로 전달
+        }
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("user/login");
+
         return modelAndView;
     }
 
-
     @RequestMapping(value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-
-    public String postLogin(UserEntity user, HttpSession session) {
+    public String postLogin(UserEntity user, HttpSession session, @RequestParam(value = "redirect", required = false) String redirect) {
         Result result = this.userService.login(user);
         JSONObject response = new JSONObject();
-        // 로그인 성공 시 세션에 사용자 정보 추가
+
+        // 로그인 성공 시
         if (result == CommonResult.SUCCESS) {
             session.setAttribute("user", user);
-        }
-        // JSON 응답 생성
-        response.put(Result.NAME, result.nameToLower());
+            response.put("MemberNum", user.getUsNum());
 
+
+            if (redirect == null) {
+                // 사용자 요청에 redirect 파라미터가 없다면
+                redirect = (String) session.getAttribute("redirect");
+                // 세션에서 redirect 값을 가져오고
+                if (redirect == null) {
+                    // 세션에도 redirect 값이 없다면
+                    redirect = "/";  // 여기로 보내라
+                }
+            }
+            response.put("redirect", redirect);
+            // 최종적으로 결정된 redirect 값을 JSON 방식으로 보냄
+        }
+
+        response.put(Result.NAME, result.nameToLower());
         return response.toString();
     }
-
 
 
 // endregion
@@ -106,18 +127,39 @@ public class UserController {
 
 
     @RequestMapping(value = "/myPage/{fragment}", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getMyPage(HttpServletResponse response, UserEntity user, HttpSession session, @PathVariable(value = "fragment") String fragment) {
+    public ModelAndView getMyPage(HttpServletResponse response, UserEntity user, HttpSession session, @PathVariable(value = "fragment") String fragment, HttpServletRequest request) throws ServletException, IOException {
+        // 예약 정보 가져오기
+        UserEntity users = (UserEntity) session.getAttribute("user");
+        Map<Set<String>, List<String>> reservations = this.userService.reservationInformation(users.getUsNum()); // 예약 정보 12.26
+        List<List<String>> cancelReservations = this.userService.selectCancelPaymentByUsNum(users.getUsNum()); // 취소 정보 12.26
+
+
+
+        // ModelAndView에 데이터 전달
         String[] validFragments = {"main", "reservation", "receipt", "personal", "withdraw"};
         if (fragment == null || Arrays.stream(validFragments).noneMatch(x -> x.equals(fragment))) {
             response.setStatus(404);
             return null;
         }
+
+        if (session.getAttribute("user") == null) {
+            String requestedUrl = request.getRequestURI(); // 현재 요청 URL을 가져옴
+            // 포워드 방식으로 로그인 페이지로 이동
+            request.setAttribute("redirect", requestedUrl);
+            request.getRequestDispatcher("/user/login").forward(request, response); // 내부 요청 포워드
+            return null;  // 포워드 후 반환할 필요는 없으므로 null
+        }
+
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("user", user);
         modelAndView.addObject("session", session);
         modelAndView.addObject("fragment", fragment);
+        modelAndView.addObject("reservations", reservations); //12.26일한거
+        modelAndView.addObject("cancelReservations", cancelReservations); //12.26일한거
         modelAndView.setViewName("user/myPage/myPage");
+
         return modelAndView;
+
     }
 
 
@@ -132,6 +174,7 @@ public class UserController {
         modelAndView.setViewName("user/myPage/modify");
         return modelAndView;
     }
+
 
 //    @RequestMapping(value = "/myPage/modify", method = RequestMethod.GET, produces =
 //            MediaType.TEXT_HTML_VALUE)
@@ -226,7 +269,7 @@ public class UserController {
     @RequestMapping(value = "/find-password-result", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ModelAndView getRecoverPassword(@RequestParam(value = "userEmail", required =
-                                                   false) String userEmail,
+            false) String userEmail,
                                            @RequestParam(value = "key", required = false) String key,
                                            @RequestParam(value = "userId", required =
                                                    false) String userId

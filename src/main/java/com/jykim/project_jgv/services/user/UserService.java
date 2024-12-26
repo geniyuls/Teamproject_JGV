@@ -11,19 +11,27 @@ import com.jykim.project_jgv.results.Result;
 import com.jykim.project_jgv.results.reservation.ReservationResult;
 import com.jykim.project_jgv.results.user.*;
 import com.jykim.project_jgv.utils.CryptoUtils;
+import com.jykim.project_jgv.vos.user.ReservationVo;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -220,6 +228,39 @@ public class UserService {
     }
 // endregion
 
+    // region 토큰 미인증 계정 삭제
+    @Configuration
+    @EnableScheduling
+    public class SchedulerConfiguration {
+    }
+
+    @Scheduled(cron = "0 1 * * * ?")
+    public Result deleteUnverifiedUsers() {
+        LocalDateTime now = LocalDateTime.now();
+        List<UserEntity> unverifiedUsers = this.userMapper.selectUnverifiedUsersWithExpiredToken(now);
+
+        if (unverifiedUsers != null && !unverifiedUsers.isEmpty()) {
+            int deletedCount = 0;
+            for (UserEntity user : unverifiedUsers) {
+                int rowsAffected = this.userMapper.deleteUserById(user.getUsId());
+                if (rowsAffected > 0) {
+                    deletedCount++;
+                }
+            }
+
+            if (deletedCount > 0) {
+                System.out.println("ㅋㅋ 지움");
+                return CommonResult.SUCCESS;  // 일부 사용자 삭제 성공
+            } else {
+                return CommonResult.FAILURE;  // 삭제된 사용자가 없음
+            }
+        }
+        System.out.println("실패임 ㅋㅋ ");
+        return CommonResult.FAILURE;  // 미인증 사용자 없음
+    }
+
+    // endregion
+
     // region 아이디 , 닉네임 중복검사
     @Transactional
     public Result checkDuplicateUser(String userId) {
@@ -284,6 +325,8 @@ public class UserService {
     // TODO 추후 비밀번호 재설정시 강도, REGEX 추가
 
     public Result findUserPassword(UserEntity user) {
+
+
         UserEntity dbUser = this.userMapper.FindUserById(user.getUsId(), user.getUsEmail(), user.getUsContact());
         if (dbUser == null) {
 
@@ -437,16 +480,6 @@ public class UserService {
         }
         return CommonResult.SUCCESS;
     }
-
-    public Result reservationCancel(UserEntity user) {
-        if (user == null) {
-            return CommonResult.FAILURE;
-        }
-        // pa.state 가 이미 0일때 return ReservationResult.FAILURE_CANCEL_COMPLETE;
-        // setPaState(false);
-        return CommonResult.SUCCESS;
-    }
-
     // endregion
 
     // region 회원탈퇴
@@ -465,5 +498,77 @@ public class UserService {
         }
         return CommonResult.SUCCESS;
     }
+    // endregion
+
+    // region 예매 취소
+
+    public Result reservationCancel(UserEntity user) {
+        if (user == null) {
+            return CommonResult.FAILURE;
+        }
+        // pa.state 가 이미 0일때 return ReservationResult.FAILURE_CANCEL_COMPLETE;
+        // setPaState(false);
+        return CommonResult.SUCCESS;
+    }
+
+    // endregion
+
+    // region 예매 내역
+
+    public Map<Set<String>, List<String>> reservationInformation(int usNum) {
+        Map<Set<String>, List<String>> map = new LinkedHashMap<>();
+        ReservationVo[] reservationVo = this.userMapper.selectPaymentByUsNum(usNum);
+        for (ReservationVo reservationVos : reservationVo) {
+            Set<String> strings = new LinkedHashSet<>();
+            List<String> strings1 = new ArrayList<>();
+            strings.add(String.valueOf(reservationVos.getPaNum()));
+            strings.add(String.format("%,d", reservationVos.getPaPrice()) + "원");
+            strings.add(String.valueOf(reservationVos.getCiName()));
+            strings.add(String.valueOf(reservationVos.getThName()));
+            LocalDate localDate = LocalDate.parse(reservationVos.getScStartDate().toString().split("T")[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            strings.add(reservationVos.getScStartDate().toString().split("T")[0] + "(" + localDate.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.KOREAN).split("요일")[0] + ") " + reservationVos.getScStartDate().toString().split("T")[1]);
+            strings.add(String.valueOf(reservationVos.getMImgUrl()));
+            strings.add(String.valueOf(reservationVos.getMoTitle()));
+            strings.add(String.valueOf(reservationVos.getMeName()));
+
+            strings1.add(String.valueOf(reservationVos.getSeName()));
+
+            map.computeIfAbsent(strings, k -> new ArrayList<>()).addAll(strings1);
+        }
+        return map;
+    }
+    public List<List<String>> selectCancelPaymentByUsNum(int usNum) {
+        List<List<String>> map = new ArrayList<>();
+        ReservationVo[] reservationVo = this.userMapper.selectCancelPaymentByUsNum(usNum);
+
+        for (ReservationVo reservationVos : reservationVo) {
+            List<String> strings = new ArrayList<>();
+
+            // 1. 극장 이름
+            strings.add(reservationVos.getThName());
+
+            // 2. 상영 시작 날짜와 요일
+            String[] startDateTimeParts = reservationVos.getScStartDate().toString().split("T");
+            LocalDate localDate = LocalDate.parse(startDateTimeParts[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            String formattedStartDate = startDateTimeParts[0] + "(" +
+                    localDate.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.KOREAN).split("요일")[0] +
+                    ") " +
+                    startDateTimeParts[1];
+            strings.add(formattedStartDate);
+
+            // 3. 삭제된 날짜
+            strings.add(reservationVos.getPaDeletedAt().toString().replace("T", " "));
+
+            // 4. 가격
+            strings.add(String.format("%,d", reservationVos.getPaPrice()) + "원");
+
+            // 리스트에 추가
+            map.add(strings);
+        }
+
+        return map;
+    }
+
+
     // endregion
 }
